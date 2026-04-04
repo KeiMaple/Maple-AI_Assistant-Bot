@@ -23,6 +23,7 @@ Phone Installation (Android/iOS):
 2. Open the URL in Chrome/Safari
 3. Tap the browser menu → "Add to Home Screen"
 4. Maple appears as a real app icon on your home screen — opens fullscreen, no browser chrome
+5. [Maple-App.zip](https://github.com/user-attachments/files/26484191/Maple-App.zip)
 
 Laptop Installation:
 1. Open the hosted URL in Chrome or Edge
