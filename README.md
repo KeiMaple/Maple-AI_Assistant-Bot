@@ -31,7 +31,9 @@ Laptop Installation:
 3. It installs as a standalone desktop app
 4. To run locally for testing: open a terminal in the folder → python -m http.server 8000 → go to localhost:8000
 
+
 What Maple's brain does:
+
 10 knowledge domains    —   greetings, math, coding, game dev, writing, cloud/tech, study help, motivation, planning, recommendations
 Auto-learner            —   17 regex patterns extract facts from conversation ("I'm studying at TSU", "I love game dev") and save them automatically
 Manual memory           —   add facts directly in the Memory panel; Maple injects them into every response
