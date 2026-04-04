@@ -2,12 +2,19 @@
 
 6 Files Included:
 File            |   Role
+
 index.html      |   App shell, security headers, UI structure
+
 style.css       |   Full pink aesthetic — dark rose, ambient orbs, mobile-first
+
 brain.js        |   Maple's entire AI — knowledge base, memory engine, NLP, learning
+
 app.js          |   UI controller — events, security, rendering, PWA boot
+
 sw.js           |   Service worker — offline support, asset caching
+
 manifest.json   |   PWA manifest — makes it installable on phone + laptop
+
 
 * How to install it as an actual app *
   
