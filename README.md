@@ -16,6 +16,7 @@ sw.js           |   Service worker — offline support, asset caching
 manifest.json   |   PWA manifest — makes it installable on phone + laptop
 
 
+
 * How to install it as an actual app *
   
 Phone Installation (Android/iOS):
