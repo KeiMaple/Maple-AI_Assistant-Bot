@@ -1,0 +1,29 @@
+{
+  "name": "Maple — Personal AI Assistant",
+  "short_name": "Maple",
+  "description": "Your personal AI assistant that learns and grows with you.",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#1a0a12",
+  "theme_color": "#1a0a12",
+  "lang": "en",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%231a0a12'/><text x='50%' y='58%' text-anchor='middle' dominant-baseline='middle' font-size='320'>🌸</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "New conversation",
+      "short_name": "New chat",
+      "description": "Start a new conversation with Maple",
+      "url": "./"
+    }
+  ]
+}

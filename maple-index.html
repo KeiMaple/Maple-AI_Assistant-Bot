@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Maple" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#1a0a12" />
+
+  <!-- Security headers -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Icons -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+
+  <title>Maple</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Ambient background orbs ───────────────────────── -->
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       APP SHELL
+  ══════════════════════════════════════════════════════ -->
+  <div id="app">
+
+    <!-- ── Sidebar ──────────────────────────────────────── -->
+    <aside id="sidebar" aria-label="Maple navigation">
+
+      <div class="sidebar-top">
+        <div class="maple-logo">
+          <span class="logo-blossom" aria-hidden="true">🌸</span>
+          <span class="logo-name">Maple</span>
+        </div>
+
+        <button id="new-chat-btn" class="new-chat-btn" aria-label="Start new conversation">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New chat
+        </button>
+
+        <div class="sidebar-section-label">Recent</div>
+        <div id="history-list" role="list" aria-label="Conversation history"></div>
+      </div>
+
+      <div class="sidebar-bottom">
+        <button id="memory-btn" class="sidebar-nav-btn" aria-label="Open memory manager">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+          Memory
+          <span id="memory-count-badge" class="memory-badge" aria-label="memory entries">0</span>
+        </button>
+        <button id="settings-btn" class="sidebar-nav-btn" aria-label="Open settings">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          Settings
+        </button>
+      </div>
+    </aside>
+
+    <!-- ── Sidebar overlay (mobile) ─────────────────────── -->
+    <div id="sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ── Main chat area ───────────────────────────────── -->
+    <main id="main" aria-label="Chat with Maple">
+
+      <!-- Top bar -->
+      <header id="topbar">
+        <button id="menu-btn" class="icon-btn" aria-label="Open menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="topbar-title">
+          <span id="chat-title">Maple</span>
+          <span class="topbar-status">
+            <span class="status-pulse" aria-hidden="true"></span>
+            <span id="status-text">Ready</span>
+          </span>
+        </div>
+        <button id="clear-btn" class="icon-btn" aria-label="Clear conversation">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+        </button>
+      </header>
+
+      <!-- Message feed -->
+      <div id="messages" role="log" aria-live="polite" aria-label="Conversation with Maple">
+        <!-- Welcome screen shown when no messages -->
+        <div id="welcome-screen" aria-label="Welcome to Maple">
+          <div class="welcome-blossom" aria-hidden="true">🌸</div>
+          <h1 class="welcome-title">Hi, I'm Maple</h1>
+          <p class="welcome-sub">Your personal AI assistant. I learn as we talk<br>and remember what matters to you.</p>
+          <div class="welcome-starters" role="list" aria-label="Conversation starters">
+            <button class="starter-chip" role="listitem">What can you help me with?</button>
+            <button class="starter-chip" role="listitem">Remember something about me</button>
+            <button class="starter-chip" role="listitem">Help me plan my day</button>
+            <button class="starter-chip" role="listitem">Explain something to me</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input area -->
+      <div id="input-wrapper">
+        <div id="input-bar">
+          <textarea
+            id="user-input"
+            placeholder="Ask Maple anything…"
+            rows="1"
+            maxlength="4000"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Message input"
+          ></textarea>
+          <button id="send-btn" aria-label="Send message" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </div>
+        <div id="input-footer">
+          <span id="char-count" aria-live="polite">0 / 4000</span>
+          <span class="input-hint">Shift+Enter for new line · Enter to send</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       MEMORY PANEL (slide-in drawer)
+  ══════════════════════════════════════════════════════ -->
+  <div id="memory-panel" class="panel" role="dialog" aria-modal="true" aria-label="Memory manager" hidden>
+    <div class="panel-header">
+      <h2 class="panel-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+        Maple's Memory
+      </h2>
+      <button class="panel-close" aria-label="Close memory panel">✕</button>
+    </div>
+    <p class="panel-desc">Maple learns from your conversations. You can also add facts manually — she'll use them to give better answers.</p>
+
+    <!-- Add memory form -->
+    <div class="memory-add-form">
+      <input
+        id="memory-input"
+        type="text"
+        placeholder="e.g. I'm a CS student at TSU"
+        maxlength="300"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="New memory fact"
+      />
+      <button id="memory-add-btn" aria-label="Save memory fact">Save</button>
+    </div>
+
+    <!-- Memory list -->
+    <div id="memory-list" role="list" aria-label="Saved memories"></div>
+    <div id="memory-empty" class="memory-empty">No memories saved yet. Start chatting and I'll learn as we go.</div>
+
+    <div class="panel-footer">
+      <button id="memory-clear-btn" class="danger-btn">Clear all memories</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SETTINGS PANEL
+  ══════════════════════════════════════════════════════ -->
+  <div id="settings-panel" class="panel" role="dialog" aria-modal="true" aria-label="Settings" hidden>
+    <div class="panel-header">
+      <h2 class="panel-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Settings
+      </h2>
+      <button class="panel-close" aria-label="Close settings">✕</button>
+    </div>
+
+    <div class="settings-group">
+      <label class="settings-label">Your name</label>
+      <input id="settings-name" type="text" class="settings-input" placeholder="e.g. Kei" maxlength="50" autocomplete="off" />
+      <p class="settings-hint">Maple uses this to address you personally.</p>
+    </div>
+
+    <div class="settings-group">
+      <label class="settings-label">Auto-learn from conversations</label>
+      <label class="toggle-switch" aria-label="Toggle auto-learning">
+        <input type="checkbox" id="autolearn-toggle" checked />
+        <span class="toggle-track"></span>
+      </label>
+      <p class="settings-hint">When on, Maple extracts and saves key facts from your messages automatically.</p>
+    </div>
+
+    <div class="settings-group">
+      <label class="settings-label">Response style</label>
+      <select id="style-select" class="settings-input" aria-label="Choose response style">
+        <option value="balanced">Balanced</option>
+        <option value="concise">Concise</option>
+        <option value="detailed">Detailed</option>
+        <option value="casual">Casual & friendly</option>
+      </select>
+    </div>
+
+    <div class="settings-group">
+      <label class="settings-label">Export my data</label>
+      <button id="export-btn" class="secondary-btn">Download memories + history</button>
+      <p class="settings-hint">Saves a JSON file with all your memories and conversations.</p>
+    </div>
+
+    <div class="panel-footer">
+      <button id="reset-btn" class="danger-btn">Reset everything</button>
+    </div>
+  </div>
+
+  <!-- Panel backdrop -->
+  <div id="panel-backdrop" class="panel-backdrop" aria-hidden="true"></div>
+
+  <script src="brain.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
