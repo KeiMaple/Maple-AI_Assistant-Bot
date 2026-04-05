@@ -36,7 +36,7 @@ What Maple's brain does:
 
 10 knowledge domains    —   greetings, math, coding, game dev, writing, cloud/tech, study help, motivation, planning, recommendations
 
-Auto-learner            —   17 regex patterns extract facts from conversation ("I'm studying at TSU", "I love game dev") and save them automatically
+Auto-learner            —   17 regex patterns extract facts from conversation ("I love game dev") and save them automatically
 
 Manual memory           —   add facts directly in the Memory panel; Maple injects them into every response
 
